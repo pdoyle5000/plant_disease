@@ -11,7 +11,7 @@ import random
 BASE_IMAGE_DIR = "/home/pdoyle/ssd/datasets/plant_disease/PlantVillage"
 STDDEV = [0.192966, 0.170431, 0.207222]
 MEAN = [0.458809, 0.475045, 0.411325]
-VECTOR_SIZE = (128, 128)
+VECTOR_SIZE = (200, 200)
 CLASS_MAP = [
     "tomato_healthy",  # 0
     "tomato_early_blight",  # 1
