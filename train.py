@@ -7,7 +7,6 @@ import torch.optim as optim
 from cnn import PlantDiseaseNet
 from torch.utils.tensorboard import SummaryWriter
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-from sklearn.metrics import multilabel_confusion_matrix
 
 
 class PlantDiseaseTrainer:
@@ -16,17 +15,17 @@ class PlantDiseaseTrainer:
         self.epochs = epochs
         self.train_set = PlantDiseaseDataset(SetType.train, shuffle=True)
         self.train_loader = DataLoader(
-            self.train_set, batch_size=128, shuffle=True, num_workers=8
+            self.train_set, batch_size=128, shuffle=True, num_workers=12
         )
 
         self.test_set = PlantDiseaseDataset(SetType.test)
         self.test_loader = DataLoader(
-            self.test_set, batch_size=128, shuffle=False, num_workers=8
+            self.test_set, batch_size=128, shuffle=False, num_workers=1
         )
 
         self.val_set = PlantDiseaseDataset(SetType.val, shuffle=True)
         self.val_loader = DataLoader(
-            self.val_set, batch_size=64, shuffle=False, num_workers=8
+            self.val_set, batch_size=64, shuffle=False, num_workers=12
         )
 
         self.config = {
@@ -106,6 +105,6 @@ class PlantDiseaseTrainer:
 
 
 if __name__ == "__main__":
-    trainer = PlantDiseaseTrainer(sys.argv[1], 400)
+    trainer = PlantDiseaseTrainer(sys.argv[1], 500)
     trainer.train()
     torch.save(trainer.net.state_dict(), trainer.output_filename)
