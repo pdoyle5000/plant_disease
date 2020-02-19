@@ -105,6 +105,6 @@ class PlantDiseaseTrainer:
 
 
 if __name__ == "__main__":
-    trainer = PlantDiseaseTrainer(sys.argv[1], 500)
+    trainer = PlantDiseaseTrainer(sys.argv[1], 425)
     trainer.train()
     torch.save(trainer.net.state_dict(), trainer.output_filename)
