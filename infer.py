@@ -15,6 +15,14 @@ class PlantDiseaseClassifier:
         model.load_state_dict(torch.load(model_path))
         return model
 
+    def __call__(self, image: JpegImageFile) -> List[float]:
+        composer = inference_composer(STDDEV, MEAN)
+        image = composer(image)
+        with torch.no_grad():
+            output = self.model(image.float().unsqueeze(0)).squeeze(0)
+            softmax = torch.nn.Softmax(dim=0)
+            return softmax(output)
+
     def predict(self, image: JpegImageFile) -> Tuple[str, int, List[float]]:
         composer = inference_composer(STDDEV, MEAN)
         image = composer(image)
