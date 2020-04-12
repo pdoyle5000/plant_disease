@@ -1,6 +1,12 @@
 import torch
-from dataset import inference_composer, STDDEV, MEAN, CLASS_MAP
-from cnn import PlantDiseaseNet
+
+try:
+    from dataset import inference_composer, STDDEV, MEAN, CLASS_MAP
+    from cnn import PlantDiseaseNet
+except ModuleNotFoundError:
+    from plant_disease.dataset import inference_composer, STDDEV, MEAN, CLASS_MAP
+    from plant_disease.cnn import PlantDiseaseNet
+
 from typing import Tuple, List
 from PIL.JpegImagePlugin import JpegImageFile
 
